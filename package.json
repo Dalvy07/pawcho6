@@ -2,7 +2,7 @@
   "name": "server-info-app",
   "version": "1.0.0",
   "description": "Приложение с информацией о сервере",
-  "main": "src/server.js",
+  "main": "server.js",
   "scripts": {
     "start": "node src/server.js"
   },
