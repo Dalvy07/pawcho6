@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.4
 
 ARG APP_VERSION=1.0.0
-FROM dalvy07/alpine-minimal:3.21.3
+FROM dalvy07/alpine-minimal:3.21.3 AS builer
 
 ARG APP_VERSION
 ENV VERSION=$APP_VERSION
@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache \
 
 WORKDIR /app
 
-RUN --mount=type=ssh git clone git@github.com:yourusername/pawcho6.git .
+# RUN --mount=type=ssh git clone git@github.com:yourusername/pawcho6.git .
 
 # COPY package.json ./
 RUN npm install
@@ -30,7 +30,7 @@ RUN mkdir dist && mv index.html dist/
 
 FROM nginx:alpine
 
-COPY --from=builder /app/dist/index.html /usr/share/nginx/html/
+COPY --from=builer /app/dist/index.html /usr/share/nginx/html/
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s CMD \
     curl -f http://localhost:80 || exit 1
