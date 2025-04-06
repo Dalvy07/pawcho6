@@ -10,11 +10,14 @@ RUN apk update && apk add --no-cache \
     nodejs \
     npm \
     curl \
-    git
+    git \
+    openssh-client
+
+# RUN mkdir -p -m 0700 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
 
 WORKDIR /app
 
-# RUN --mount=type=ssh git clone git@github.com:yourusername/pawcho6.git .
+# RUN --mount=type=ssh git clone git@github.com:Dalvy07/pawcho6.git
 
 COPY package.json ./
 
