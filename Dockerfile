@@ -16,10 +16,11 @@ WORKDIR /app
 
 # RUN --mount=type=ssh git clone git@github.com:yourusername/pawcho6.git .
 
-# COPY package.json ./
+COPY package.json ./
+
 RUN npm install
 
-# COPY . .
+COPY . .
 
 RUN nohup npm start & \
     sleep 3 && \
